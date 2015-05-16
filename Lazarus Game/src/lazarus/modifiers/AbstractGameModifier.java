@@ -3,8 +3,7 @@ package lazarus.modifiers;
 import java.util.Observable;
 
 /*Abstract Game Modifiers are things that make changes to the game world:
- * weapons
- * ship movements
+ * player movements
  * player input
  * level events
  * */

@@ -15,6 +15,11 @@ import java.util.Observer;
 import java.util.Random;
 import lazarus.game.BackgroundObject;
 import lazarus.game.PlayerShip;
+import lazarus.game.enemy.Box;
+import lazarus.game.enemy.CardBox;
+import lazarus.game.enemy.MetalBox;
+import lazarus.game.enemy.StoneBox;
+import lazarus.game.enemy.WoodBox;
 import lazarus.modifiers.AbstractGameModifier;
 import lazarus.ui.GameMenu;
 

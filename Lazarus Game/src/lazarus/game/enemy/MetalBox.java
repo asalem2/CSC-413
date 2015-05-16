@@ -2,10 +2,12 @@
  *  The MetalBox class is used to create and draw the metal type box
 */
 
-package lazarus;
+package lazarus.game.enemy;
 
 import java.awt.Image;
 import java.awt.Point;
+
+import lazarus.LazarusWorld;
 
 public class MetalBox extends Box{
   public MetalBox(int x, int y){

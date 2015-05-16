@@ -11,8 +11,7 @@ public class SoundPlayer {
    private AudioInputStream soundStream; 
    private String soundFile;
    private Clip clip;
-   private int type;//1 for sounds that needs to be played all the time
-                    // 2 for sounds that only need to be played once
+   private int type;
    
    
    public SoundPlayer(int type, String soundFile){
@@ -31,9 +30,9 @@ public class SoundPlayer {
                public void run(){
                    while(true){
                        clip.start();
-                       clip.loop(clip.LOOP_CONTINUOUSLY);
                        try {
-                           Thread.sleep(10000);
+                           Thread.sleep(1000000000);
+                           Thread.interrupted();
                        } catch (InterruptedException ex) {
                            Logger.getLogger(SoundPlayer.class.getName()).log(Level.SEVERE, null, ex);
                        }

@@ -13,7 +13,7 @@ import lazarus.modifiers.AbstractGameModifier;
 import lazarus.modifiers.motions.InputController;
 
 
-public class PlayerShip extends Ship implements Observer {
+public class PlayerShip extends Ship implements Observer{
     protected int lives;
     protected int score;
     protected Point resetPoint;

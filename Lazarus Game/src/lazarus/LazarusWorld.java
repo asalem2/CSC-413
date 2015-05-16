@@ -35,6 +35,7 @@ import lazarus.game.BackgroundObject;
 import lazarus.game.PlayerShip;
 import lazarus.modifiers.AbstractGameModifier;
 import lazarus.modifiers.motions.MotionController;
+import lazarus.game.enemy.Box;
 import lazarus.ui.GameMenu;
 import lazarus.ui.InterfaceObject;
 
@@ -51,11 +52,9 @@ private Thread thread;
   Random generator = new Random();
   int sizeX;
   int sizeY;
-  int play = 0;
-  static int track = 0;;
-  static boolean squished = false;
+  static boolean squished;
   static int times = 0;
-  static int first = 0;
+  static int first;
   Point mapSize;
   private ArrayList<PlayerShip> players;
   private ArrayList<InterfaceObject> ui;
@@ -70,17 +69,7 @@ private Thread thread;
   ImageObserver observer;
   public static SoundPlayer sp;
   private LazarusWorld() {
-    setFocusable(true);
-    this.background = new ArrayList();
-    this.players = new ArrayList();
-    this.ui = new ArrayList();
-    this.boxes = new ArrayList();
-    this.walls = new ArrayList();
-    this.fallingboxes = new ArrayList();
-    this.restedboxes = new ArrayList(16);
-    for (int i = 0; i < 16; i++) {
-      this.restedboxes.add(new ArrayList());
-    }
+   
   }
   
   public static LazarusWorld getInstance(){
@@ -88,6 +77,22 @@ private Thread thread;
   }
   
   public void init(){
+	  setFocusable(true);
+	    this.background = new ArrayList();
+	    this.players = new ArrayList();
+	    this.ui = new ArrayList();
+	    this.boxes = new ArrayList();
+	    this.walls = new ArrayList();
+	    this.fallingboxes = new ArrayList();
+	    this.restedboxes = new ArrayList(16);
+	    for (int i = 0; i < 16; i++) {
+	      this.restedboxes.add(new ArrayList());
+	    }
+	    squished = false;
+	    first = 0;
+	    gameOver = false;
+	    gameWon = false;
+	    gameFinished = false;
     setBackground(Color.white);
     this.observer = this;
 	 loadSprites();
@@ -394,18 +399,22 @@ private Thread thread;
     }
     else{
       g2.setColor(Color.MAGENTA);
-      g2.setFont(new Font("Calibri", 0, 40));
+      g2.setFont(new Font("Ravie", 0, 40));
+      
       if (!this.gameWon){
-    	  g2.drawString("       Game Over!", this.sizeX / 4, 200);
+    	  g2.drawString("Game Over!", this.sizeX / 4, 200);
+
+    	  g2.drawString("You've been SQUISHED", this.sizeX / 4 -120, 300);
     	     
     	  this.thread.interrupt();
       } 
       else{
-    	  g2.drawString("       You Win!", this.sizeX / 3, 200);
+    	  g2.drawString("  Winner!", this.sizeX / 4, 200);
+
+    	  g2.drawString("You made it to the top", this.sizeX / 4 -145, 300);
     	     
     	  this.thread.interrupt();
       }
-      this.sp.stop();
     }
   }
   }
@@ -431,9 +440,8 @@ private Thread thread;
     drawFrame(windowSize.width, windowSize.height, g2);
     g2.dispose();
     g.drawImage(this.bimg, 0, 0, this);
-
-    System.out.println(track++);
   }
+  
   public void addClockObserver(Observer theObject){
     clock.addObserver(theObject);
   }
@@ -456,14 +464,19 @@ private Thread thread;
         break;
       }
     }
+    try { 
+    	Thread.sleep(3000);
+    } 
+    catch (InterruptedException exc) {
+    	/* code to handle what happens if someone didn't want you to sleep*/}
     removeRestedBox();
     removeFallingbox();
+
+	sp.stop();
     LazarusWorld game = getInstance();
     menu = new GameMenu();
     game.init();
     game.start();
-
-    System.out.print(track++);
   }
   
  

@@ -2,10 +2,12 @@
  *  The CardBox class is used to create and draw the cardboard type box
 */
 
-package lazarus;
+package lazarus.game.enemy;
 
 import java.awt.Image;
 import java.awt.Point;
+
+import lazarus.LazarusWorld;
 
 public class CardBox extends Box{
 	public CardBox(int x, int y){

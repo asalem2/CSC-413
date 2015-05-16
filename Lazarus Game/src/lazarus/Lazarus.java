@@ -9,6 +9,7 @@ import java.util.ListIterator;
 import lazarus.GameSounds;
 import lazarus.GameWorld;
 import lazarus.game.PlayerShip;
+import lazarus.game.enemy.Box;
 import lazarus.modifiers.motions.InputController;
 
 public class Lazarus extends PlayerShip{
@@ -98,7 +99,6 @@ public class Lazarus extends PlayerShip{
     public void die(){
     		lives--;
         if(lives == 0 && LazarusWorld.squished == true){
-        	System.out.println("Squished");
         	show = false;
             GameSounds.play("Resources/Squished.wav");
             GameWorld.setSpeed(new Point(0, 0));

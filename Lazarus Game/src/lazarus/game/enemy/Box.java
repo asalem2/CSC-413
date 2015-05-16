@@ -2,7 +2,7 @@
  *  The Box Class is the super class for all box types
 */
 
-package lazarus;
+package lazarus.game.enemy;
 
 import java.awt.Image;
 import java.awt.Point;

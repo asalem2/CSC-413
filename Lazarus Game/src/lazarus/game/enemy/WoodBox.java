@@ -2,10 +2,12 @@
  *  The WoodBox class is used to create and draw the wood type box
 */
 
-package lazarus;
+package lazarus.game.enemy;
 
 import java.awt.Image;
 import java.awt.Point;
+
+import lazarus.LazarusWorld;
 
 public class WoodBox extends Box{
   public WoodBox(int x, int y){

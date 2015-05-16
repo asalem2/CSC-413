@@ -8,6 +8,7 @@ import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.util.Observable;
 
+import lazarus.GameSounds;
 import lazarus.LazarusWorld;
 import lazarus.SoundPlayer;
 import lazarus.game.PlayerShip;
@@ -26,7 +27,7 @@ public class GameMenu extends InterfaceObject {
 		waiting = true;
 	}
 	public void draw(Graphics g2, int x, int y){
-		g2.setFont(new Font("Berlin Sans FB", Font.PLAIN, 24));
+		g2.setFont(new Font("Ravie", Font.PLAIN, 20));
 		if(selection==0)
 			g2.setColor(Color.MAGENTA);
 		else
@@ -52,11 +53,14 @@ public class GameMenu extends InterfaceObject {
 	public void down(){
 		if(selection<3)
 			selection++;
+		GameSounds.play("Resources/Click.wav");
 	}
 	
 	public void up(){
 		if(selection>0)
 			selection--;
+
+		GameSounds.play("Resources/Click.wav");
 	}
 	
 	public void applySelection(){
@@ -64,12 +68,18 @@ public class GameMenu extends InterfaceObject {
 		Dimension size = world.getSize();
 		if(selection == 0){
 			selection = 0;
+
+			LazarusWorld.sp = new SoundPlayer(1, "Resources/Music.wav");
 		}
 		else if(selection == 1){
 			selection = 1;
+
+			LazarusWorld.sp = new SoundPlayer(1, "Resources/Music.wav");
 		}
 		else if (selection == 2){
 			selection = 2;
+
+			LazarusWorld.sp = new SoundPlayer(1, "Resources/Music.wav");
 		}
 		else{
 			System.exit(0);
@@ -78,11 +88,10 @@ public class GameMenu extends InterfaceObject {
 		controller.deleteObservers();
 		world.removeKeyListener(controller);
 		waiting=false;
-		LazarusWorld.sp = new SoundPlayer(1, "Resources/Music.wav");
 	}
 	
 	public void update(Observable o, Object arg) {
-		AbstractGameModifier modifier = (AbstractGameModifier) o;
+		AbstractGameModifier modifier =  (AbstractGameModifier) o;
 		modifier.read(this);
 	}
 	
